@@ -19,6 +19,7 @@ app.get("/", async (req, res) => {
   const food = new Foodmodels({ foodName: "Orange", daysSinceIAte: 10 });
   try {
     await food.save();
+    res.send("Data Inserted");
   } catch (err) {
     console.log(err);
   }
