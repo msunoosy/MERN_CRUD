@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const Foodmodels = require("./models/Food");
+const Foodmodel = require("./models/Food");
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -20,7 +20,7 @@ mongoose.connect(
 app.post("/insert", async (req, res) => {
   const FoodName = req.body.FoodName;
   const days = req.body.days;
-  const food = new Foodmodels({ foodName: FoodName, daysSinceIAte: days });
+  const food = new Foodmodel({ foodName: FoodName, daysSinceIAte: days });
   try {
     await food.save();
     res.send("Data Inserted");
