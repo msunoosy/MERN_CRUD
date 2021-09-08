@@ -1,12 +1,17 @@
 import { useState } from "react";
 import "./App.css";
+import axios from "axios";
 
 function App() {
   const [FoodName, setFoodName] = useState("");
   const [days, setdays] = useState(0);
 
   const listHandler = () => {
-    console.log(FoodName + days);
+    axios.post("http://localhost:3001/insert", {
+      FoodName: FoodName,
+      days: days,
+    });
+    console.log(FoodName);
   };
 
   return (
@@ -19,6 +24,7 @@ function App() {
       ></input>
       <label>Days</label>
       <input
+        type="number"
         onChange={(e) => {
           setdays(e.target.value);
         }}
