@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 
 function App() {
   const [FoodName, setFoodName] = useState("");
   const [days, setdays] = useState(0);
+  const [foodList, setFoodList] = useState("");
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/read").then((respose) => {
+      setFoodList(respose.data);
+    });
+  }, []);
 
   const listHandler = () => {
     axios.post("http://localhost:3001/insert", {
