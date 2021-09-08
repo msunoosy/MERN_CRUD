@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 
 function App() {
   const [FoodName, setFoodName] = useState("");
   const [days, setdays] = useState(0);
-  const [foodList, setFoodList] = useState("");
+  const [foodList, setFoodList] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/read").then((respose) => {
-      setFoodList(respose.data);
+    axios.get("http://localhost:3001/read").then((response) => {
+      setFoodList(response.data);
     });
   }, []);
 
@@ -36,6 +36,16 @@ function App() {
         }}
       ></input>
       <button onClick={listHandler}>Submit</button>
+      <div className="listwrapper">
+        <h1>Food List</h1>
+        {foodList.map((val, key) => {
+          return (
+            <div key={key}>
+              <h1>{val.foodName}</h1> {"  "} <h1>{val.daysSinceIAte}</h1>{" "}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
