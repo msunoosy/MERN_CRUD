@@ -11,7 +11,6 @@ function App() {
       FoodName: FoodName,
       days: days,
     });
-    console.log(FoodName);
   };
 
   return (

@@ -3,12 +3,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const Foodmodel = require("./models/Food");
 const app = express();
+
 app.use(express.json());
 app.use(cors());
-
-app.listen(3001, () => {
-  console.log("Server is running on 3001");
-});
 
 mongoose.connect(
   "mongodb+srv://user:root@cluster0.trhmt.mongodb.net/food?retryWrites=true&w=majority",
@@ -27,4 +24,17 @@ app.post("/insert", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+app.get("/read", async (req, res) => {
+  Foodmodel.find({}, (err, result) => {
+    if (err) {
+      res.send(err);
+    }
+    res.send(result);
+  });
+});
+
+app.listen(3001, () => {
+  console.log("Server is running on 3001");
 });
